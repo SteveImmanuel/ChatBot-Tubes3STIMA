@@ -1,4 +1,5 @@
 def KMP(pattern, text):
+#String Matching versi 1
     n = len(text)
     m = len(pattern)
 
@@ -27,6 +28,7 @@ def KMP(pattern, text):
     return max*100/n
 
 def checkFail(pattern):
+#Utility function for KMP
     fail = []
     fail.append(0)
     m = len(pattern)
@@ -85,6 +87,35 @@ def makeLast(pattern):
         last[i] += i
     return last
 
+def deleteStopWord(pattern, listOfStopWord):
+#clean the received string
+    for word in listOfStopWord:
+        x = word + " "
+        pattern = pattern.replace(x, '')
+        pattern = pattern.replace(word, '')
+    pattern = pattern.replace('?', '')
+    pattern = pattern.strip()
+    return pattern
+
+def addSynonym(pattern, listOfSynonym):
+#generate list of similar string meaning with pattern
+    result = [pattern]
+    for word in listOfSynonym:
+        temp = pattern.replace(word[0], word[1])
+        if(pattern != temp):
+            result.append(temp)
+    return result
+
+fStopWord = open('StopWord.txt', 'r')#readfile
+listOfStopWord = [line.rstrip('\n') for line in fStopWord]
+
+fSynonym = open('Synonym.txt', 'r')#readfile
+listOfSynonym = [[word.rstrip('\n') for word in line.split(' ')] for line in fSynonym]
+
+fQnA = open('QnA.txt', 'r')#readfile
+listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
+print(listOfQnA)
+
 a = str(input())
-b = str(input())
-print(BM(a,b))
+a = deleteStopWord(a, listOfStopWord)
+print(a)
