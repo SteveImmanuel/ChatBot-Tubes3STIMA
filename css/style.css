@@ -54,17 +54,26 @@ form {
 }
 
 .confBar{
-	/* width:80%; */
 	width: 90%;
 	margin: 0 auto;
-	/* display: inline; */
 	background-color: #e9e9e9;
 	border-radius: 10px;
 }
 
 .confLvl{
-	width:100%;
 	background-color: #48d648;
 	text-align: center;
 	border-radius: 10px;
+}
+
+.mainScreen{
+	height: 100px;
+	width: 100%;
+	text-align: center;
+}
+
+.chatText{
+	font-size:40px;
+	font-family: Helvetica;
+	display: none;
 }
