@@ -1,6 +1,14 @@
 $(document).ready(function(){
     $("#chat-text").fadeIn(1000);
-
+    
+    document.getElementById("avatar-video").addEventListener("ended", changeAvatar, false);
+    function changeAvatar() {
+        $("#avatar-video source").attr("src", "assets/dummy1.mp4");
+        $("#avatar-video").attr("loop", true);
+        $("#avatar-video")[0].load();
+        document.getElementById("avatar-video").removeEventListener("ended", changeAvatar, false);
+    }
+    
     $("#sendButton").click(
         function(){
             $("#chat-text").fadeOut(1000);
@@ -28,5 +36,7 @@ $(document).ready(function(){
                 }
             }
         }
-    );
+        );
 });
+    
+        

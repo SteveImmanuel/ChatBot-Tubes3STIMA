@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>ChatBot TUBES 3 STIMA</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -8,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <?php include "handler.php" ?>
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="jquery.min.js"></script>
     <script src="effect.js"></script>
 </head>
 <body>
@@ -19,9 +20,16 @@
     <!-- <div id="usrInput" class="userInput" >
     </div> -->
     
+    <div id="avatar-screen" class="container-fluid" style="text-align:center;">
+        <video id="avatar-video" class="videoAvatar" autoplay>
+            <source id="video-src" src="assets/dummy2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+
     <div id="main-screen" class=" container-fluid mainScreen">
         <div id="chat-text" class="chatText"><?php echo($_GET["chat"]); ?></div>
-        <!-- <div id="chat-text" class="chatText">test123</div> -->
     </div>
     
     <div class="confPanel">
@@ -39,5 +47,6 @@
             </div>
         </form>
     </div>
+    
 </body>
 </html>

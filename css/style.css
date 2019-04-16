@@ -67,7 +67,7 @@ form {
 }
 
 .mainScreen{
-	height: 100px;
+	min-height: 100px;
 	width: 100%;
 	text-align: center;
 }
@@ -76,4 +76,9 @@ form {
 	font-size:40px;
 	font-family: Helvetica;
 	display: none;
+}
+
+.videoAvatar{
+	width: 100%;
+	max-width: 500px;
 }
