@@ -1,3 +1,7 @@
+html,body{
+	height: 100%;
+}
+
 .myButton {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
 	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
@@ -15,7 +19,7 @@
 	cursor:pointer;
 	color:#666666;
 	font-family:Verdana;
-	font-size:18px;
+	font-size:14px;
 	padding:0px 20px;
     text-decoration:none;
     margin:0px 0px 0px 10px;
@@ -67,7 +71,7 @@ form {
 }
 
 .mainScreen{
-	min-height: 100px;
+	min-height: 270px;
 	width: 100%;
 	text-align: center;
 }
@@ -80,5 +84,40 @@ form {
 
 .videoAvatar{
 	width: 100%;
-	max-width: 500px;
+	padding-left: 0px;
+	padding-right: 0px;
+	border-radius: 10px;
+}
+
+.header-page{
+	background-color: #666666;
+	text-align: center;
+	font-size: 15px;
+	font-family: Helvetica;
+	margin-bottom: 10px;
+}
+
+.main-content{
+	overflow: auto;
+	padding-bottom:50px;
+	min-height: 100%;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.footer-page{
+	text-align:center;
+	min-height: 50px;
+	position: relative;
+	bottom: 0;
+	width: 100%;
+	margin-top: -50px;
+	clear: both;
+	background-color: #666666;
+}
+
+
+.row{
+	margin-left: 0px;
+	margin-right: 0px;
 }

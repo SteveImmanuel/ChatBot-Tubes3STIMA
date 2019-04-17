@@ -3,7 +3,7 @@ $(document).ready(function(){
     
     document.getElementById("avatar-video").addEventListener("ended", changeAvatar, false);
     function changeAvatar() {
-        $("#avatar-video source").attr("src", "assets/dummy1.mp4");
+        $("#avatar-video source").attr("src", "assets/idle_avatar.mp4");
         $("#avatar-video").attr("loop", true);
         $("#avatar-video")[0].load();
         document.getElementById("avatar-video").removeEventListener("ended", changeAvatar, false);
@@ -38,5 +38,17 @@ $(document).ready(function(){
         }
         );
 });
-    
+
+function Test(){
+    var msg = new SpeechSynthesisUtterance('Halo nama saya dicky');
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[10];
+    msg.voiceURI = "native";
+    msg.volume = 1;
+    msg.rate = 1;
+    msg.pitch = 0.8;
+    msg.text = "awdad";
+    msg.lang = '-US';
+    speechSynthesis.speak(msg);
+}
         
