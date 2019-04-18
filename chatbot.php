@@ -16,24 +16,37 @@
 <body>    
     <div class="container-fluid main-content">    
         <header class="header-page">
-            Test header
+            Ini chatbot kita belum punya nama
         </header>
         <div class="row">
             <div class="col-md-6 videoAvatar">
                 <div id="avatar-screen" class="container-fluid" style="text-align:center;margin-left:0px;margin-right:0px;">
-                    <video id="avatar-video" class="videoAvatar" autoplay>
+                    <video id="avatar-video1" class="videoAvatar" autoplay>
                         <source id="video-src" src="assets/talk_avatar.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <video id="avatar-video2" class="videoAvatar hidden">
+                        <source id="video-src" src="assets/idle_avatar.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
             </div>
             <div class="col-md-6">
                 <div id="main-screen" class=" container-fluid mainScreen">
-                    <div id="chat-text" class="chatText"><?php echo($_GET["chat"]); ?></div>
+                    <div id="chat-text" class="chatText">
+                        <?php 
+                            $chat=$_GET["chat"];
+                            if(empty($chat)){
+                                echo("Halo, selamat datang..");
+                            } else {
+                                echo($chat);
+                            }
+                        ?>                    
+                    </div>
                 </div>
             
                 <div class="confPanel">
-                    Confidence Level:
+                    Level Keyakinan:
                     <div id="bar-conf" class="confBar">
                         <?php
                             $percentage = getPercentage($_GET["percentage"]);
@@ -45,7 +58,7 @@
                 <div class="mainInput">
                     <form id="chat-form" autocomplete="off" action="chatbot.php" method="get" onsubmit="return false">
                         <div class="form-group center-block d-flex">
-                            <input class="form-control" type="text" rows="1" id="chat-box" name="chat" placeholder="Say something..." autofocus>
+                            <input class="form-control" type="text" rows="1" id="chat-box" name="chat" placeholder="Katakan sesuatu..." autofocus>
                             <input id="sendButton" class="myButton" type="submit" value="Send">
                         </div>
                     </form>

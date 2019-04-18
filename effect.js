@@ -1,12 +1,14 @@
 $(document).ready(function(){
     $("#chat-text").fadeIn(1000);
     
-    document.getElementById("avatar-video").addEventListener("ended", changeAvatar, false);
+    var video1=document.getElementById("avatar-video1");
+    var video2=document.getElementById("avatar-video2");
+    video1.addEventListener("ended", changeAvatar, false);
     function changeAvatar() {
-        $("#avatar-video source").attr("src", "assets/idle_avatar.mp4");
-        $("#avatar-video").attr("loop", true);
-        $("#avatar-video")[0].load();
-        document.getElementById("avatar-video").removeEventListener("ended", changeAvatar, false);
+        video2.play();
+        video2.loop=true;
+        video2.setAttribute("class","videoAvatar");
+        video1.setAttribute("class","hidden");
     }
     
     $("#sendButton").click(
