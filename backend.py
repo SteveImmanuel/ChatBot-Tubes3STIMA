@@ -126,13 +126,27 @@ def solveQuery(pattern, listOfStopWord, listOfQnA, listOfSynonym):
             elif(score >= max[2] and question != temp[0] and question != temp[1] and  question != temp[2]):
                 max[2] = score
                 temp[2] = question
-    if(max[0] >= 90):
-        print(temp[0][1])
-    else:
-        print("1 : " + temp[0][0])
-        print("2 : " + temp[1][0])
-        print("3 : " + temp[2][0])
-        
+    print(max)
+    return temp
+
+def specialCase(pattern, text):
+    #comparing each word
+    words = pattern.split()
+    words2 = text.split()
+    point = 0
+    count = 0
+    for i in words:
+        max = 0
+        for j in words2:
+            score = KMP(i,j)
+            score2 = KMP(j,i)
+            if(score < score2):
+                score = score2
+            if(score > max):
+                max = score
+        point += len(i)*max
+        count += len(i)
+    return point/count
 
 fStopWord = open('StopWord.txt', 'r')#readfile
 listOfStopWord = [line.rstrip('\n') for line in fStopWord]
@@ -145,4 +159,8 @@ listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in
 print(listOfQnA)
 
 a = str(input())
-solveQuery(a, listOfStopWord, listOfQnA, listOfSynonym)
+b = str(input())
+c = specialCase(a, b)
+print(c)
+# listOfAnswer = solveQuery(a, listOfStopWord, listOfQnA, listOfSynonym)
+# print(listOfAnswer)
