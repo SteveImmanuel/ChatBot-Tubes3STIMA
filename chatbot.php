@@ -9,31 +9,29 @@
     <link rel="stylesheet" href="css/style.css">
     <?php include "handler.php" ?>
     <title>Document</title>
-    <script src="jquery.min.js"></script>
-    <script src="effect.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/effect.js"></script>
     <script src="//code.responsivevoice.org/responsivevoice.js?key=FfhGa0xE"></script>
 </head>
 <body>    
-    <div class="container-fluid main-content">    
-        <header class="header-page">
+    <div class="container-fluid mainContent">    
+        <header class="headerPage">
             Ini chatbot kita belum punya nama
         </header>
-        <div class="row">
-            <div class="col-md-6 videoAvatar">
-                <div id="avatar-screen" class="container-fluid" style="text-align:center;margin-left:0px;margin-right:0px;">
+        <div class="row" >
+            <div class="col-md-6">
+                <div id="avatar-screen" class="container-fluid avatarScreen">
                     <video id="avatar-video1" class="videoAvatar" autoplay>
                         <source id="video-src" src="assets/talk_avatar.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>
-                    <video id="avatar-video2" class="videoAvatar hidden">
+                    <video id="avatar-video2" class="hidden" preload="auto">
                         <source id="video-src" src="assets/idle_avatar.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" >
                 <div id="main-screen" class=" container-fluid mainScreen">
-                    <div id="chat-text" class="chatText">
+                    <div id="chat-text" class="convText">
                         <?php 
                             $chat=$_GET["chat"];
                             if(empty($chat)){
@@ -41,6 +39,12 @@
                             } else {
                                 echo($chat);
                             }
+                        ?>                    
+                    </div>
+                    <div id="answer-text" class="convText">
+                        <?php 
+                            exec("python testpython.py",$result);
+                            echo($result[0]);
                         ?>                    
                     </div>
                 </div>
@@ -71,7 +75,7 @@
     <input onclick='responsiveVoice.speak("halo nama saya ares");' type='button' value='🔊 Play' />
 -->
 
-    <footer class="footer-page">
+    <footer class="footerPage">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">

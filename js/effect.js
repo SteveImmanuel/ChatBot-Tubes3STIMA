@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $("#chat-text").fadeIn(1000);
+    $("#answer-text").fadeIn(1000);
     
     var video1=document.getElementById("avatar-video1");
     var video2=document.getElementById("avatar-video2");
@@ -10,6 +11,12 @@ $(document).ready(function(){
         video2.setAttribute("class","videoAvatar");
         video1.setAttribute("class","hidden");
     }
+
+    var temp=$("#test").height();
+    // var vidHeight=document.getElementById('avatar-screen').style.height;
+    // var outHeight=document.getElementById('main-screen').style.height;
+    // alert("vidHeight="+temp);
+    document.getElementById("main-screen").style.height=temp;
     
     $("#sendButton").click(
         function(){

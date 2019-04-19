@@ -1,38 +1,25 @@
 html,body{
 	height: 100%;
+	/* background-image: linear-gradient(to bottom left, #60bae3, #084289); */
+	background-color: #60bae3;
 }
 
 .myButton {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
-	background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:-ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
-	background-color:#f9f9f9;
-	-moz-border-radius:19px;
-	-webkit-border-radius:19px;
-	border-radius:12px;
-	border:3px solid #dcdcdc;
-	display:inline-block;
+	background-color:#dcdcdc;
+	border-radius:8px;
+	border:3px solid dimgray;
 	cursor:pointer;
-	color:#666666;
+	color:#26282b;
 	font-family:Verdana;
 	font-size:14px;
 	padding:0px 20px;
     text-decoration:none;
-    margin:0px 0px 0px 10px;
+	margin:0px 0px 0px 10px;
+	font-weight: bold;
 }
 .myButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9));
-	background:-moz-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-webkit-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-o-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:-ms-linear-gradient(top, #e9e9e9 5%, #f9f9f9 100%);
-	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0);
-	background-color:#e9e9e9;
+	background-color:#bdbdbd;
+	/* color:#dcdcdc; */
 }
 .myButton:active {
 	position:relative;
@@ -65,21 +52,28 @@ form {
 }
 
 .confLvl{
-	background-color: #48d648;
+	background-color: #df8500;
 	text-align: center;
 	border-radius: 10px;
 }
 
 .mainScreen{
-	min-height: 270px;
 	width: 100%;
 	text-align: center;
 }
 
-.chatText{
+.convText{
 	font-size:40px;
 	font-family: Helvetica;
 	display: none;
+}
+
+.avatarScreen{
+	text-align:center;
+	margin-left:0px;
+	margin-right:0px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 .videoAvatar{
@@ -87,27 +81,31 @@ form {
 	padding-left: 0px;
 	padding-right: 0px;
 	border-radius: 10px;
+	border:solid #2d3c4d 10px;
 }
 
-.header-page{
-	background-color: #666666;
+	
+
+.headerPage{
+	background-color: #2d3c4d;
 	text-align: center;
 	font-size: 15px;
 	/* font-family: Helvetica; */
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	font-weight: bold;
 	color: #dcdcdc;
 }
 
-.main-content{
+.mainContent{
 	overflow: auto;
 	padding-bottom:50px;
 	min-height: 100%;
 	padding-left: 0px;
 	padding-right: 0px;
+	position:relative;
 }
 
-.footer-page{
+.footerPage{
 	text-align:center;
 	min-height: 50px;
 	position: relative;
@@ -115,11 +113,10 @@ form {
 	width: 100%;
 	margin-top: -50px;
 	clear: both;
-	background-color: #666666;
+	background-color: #2d3c4d;
 	font-weight: bold;
 	color: #dcdcdc;
 }
-
 
 .row{
 	margin-left: 0px;
@@ -130,4 +127,6 @@ form {
 	position: absolute;
 	top: -10000px;
 	left: -10000px;
-  }
+}
+
+
