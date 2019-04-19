@@ -1,2 +1,8 @@
 Siapakah nama saya? Vinsen
 Apakah melon bulat? Ya
+Apakah ada alat untuk mencari bug? Ada, menggunakkan PyChecker
+Apakah ada arahan untuk menggunakkan python? Ada di dokumentasi PEP8
+Bagaimana cara mengakses variabel global python? Menambahkan tag global sebelum pendeklarasian variabel
+Apa perbedaan antara argumen dan parameter? Parameter adalah nama yang ada di sebuah fungsi, argumen adalah value yang diberikan saat fungsi dipanggil
+Bagaimana cara mengubah string menjadi integer? int(string)
+
