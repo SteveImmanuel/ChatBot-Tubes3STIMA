@@ -1,3 +1,12 @@
+from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+from tesaurus import *
+
+def removeStopWord(kalimat):
+    factory = StopWordRemoverFactory()
+    stopword = factory.create_stop_word_remover()
+    stop = stopword.remove(kalimat)
+    return stop
+
 def KMP(pattern, text):
 #String Matching versi 1
     n = len(text)
@@ -162,5 +171,12 @@ a = str(input())
 b = str(input())
 c = specialCase(a, b)
 print(c)
-# listOfAnswer = solveQuery(a, listOfStopWord, listOfQnA, listOfSynonym)
-# print(listOfAnswer)
+listOfAnswer = solveQuery(a, listOfStopWord, listOfQnA, listOfSynonym)
+print(listOfAnswer)
+
+# === Remove Stop Word ===
+# kalimat = 'Dengan Menggunakan Python dan Library Sastrawi saya dapat melakukan proses Stopword Removal'
+# print(removeStopWord(kalimat))
+
+# === Find Synonym ===
+# print(getSinonim('saya'))
