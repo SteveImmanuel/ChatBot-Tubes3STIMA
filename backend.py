@@ -1,5 +1,63 @@
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from tesaurus import *
+import re
+
+def controller(query):
+    splitBySpace = query.split(" ")
+    isRegex = False
+    i = 0
+    while (i < len(splitBySpace) and not isRegex):
+        isRegex = not splitBySpace[i].isalnum()
+        i += 1
+    if (isRegex):
+        Regex(query)
+    else:
+        #do something
+        pass
+
+def regexAddSynonim(idx,start, end,query, word):
+    sinonim = getSinonim(word)
+    addedWords  = "("
+    for i in range(len(sinonim)):
+        addedWords = addedWords[:len(addedWords)] + sinonim[i]
+        if (i <len(sinonim) -1):
+            addedWords = addedWords[:len(addedWords)] + "|"
+    addedWords = addedWords[:len(addedWords)] + ")"
+    query = query[:start] + addedWords + query[end:]
+    idx += len(addedWords) - len(word)
+    return {
+        'query' : query,
+        'idx' : idx
+    }
+
+
+def Regex(query):
+    query = query.lower()
+    length = len(query)
+    i = 0
+    startIdx = -1
+    endIdx = -1
+    while (i < len(query)):
+        if (query[i].isalpha()):
+            if (startIdx == -1):
+                startIdx = i
+        elif (startIdx != -1) :
+            endIdx = i
+            # print( regexAddSynonim(i, startIdx, endIdx, query, query[startIdx:(endIdx+1)]))
+            res = regexAddSynonim(i, startIdx, endIdx, query, query[startIdx:endIdx])
+            query = res['query']
+            i = res['idx']
+            print(i)
+            startIdx = -1
+        i += 1
+    print(query)
+    idxMatchedQuestion = []
+    for i in range (len(listOfQnA)):
+        x = re.search(query, listOfQnA[i][0], flags = re.IGNORECASE)
+        if (x != None):
+            idxMatchedQuestion.append(i)
+    for i in range (len(idxMatchedQuestion)):
+        print(listOfQnA[idxMatchedQuestion[i]][0])
 
 def removeStopWord(kalimat):
     factory = StopWordRemoverFactory()
@@ -157,26 +215,35 @@ def specialCase(pattern, text):
         count += len(i)
     return point/count
 
-fStopWord = open('StopWord.txt', 'r')#readfile
-listOfStopWord = [line.rstrip('\n') for line in fStopWord]
+# fStopWord = open('StopWord.txt', 'r')#readfile
+# listOfStopWord = [line.rstrip('\n') for line in fStopWord]
 
-fSynonym = open('Synonym.txt', 'r')#readfile
-listOfSynonym = [[word.rstrip('\n') for word in line.split(' ')] for line in fSynonym]
+# fSynonym = open('Synonym.txt', 'r')#readfile
+# listOfSynonym = [[word.rstrip('\n') for word in line.split(' ')] for line in fSynonym]
 
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
-print(listOfQnA)
+# print(listOfQnA)
 
-a = str(input())
-b = str(input())
-c = specialCase(a, b)
-print(c)
-listOfAnswer = solveQuery(a, listOfStopWord, listOfQnA, listOfSynonym)
-print(listOfAnswer)
+# a = str(input())
+# b = str(input())
+# c = specialCase(a, b)
+# print(c)
+# listOfAnswer = solveQuery(a, listOfStopWord, listOfQnA, listOfSynonym)
+# print(listOfAnswer)
 
 # === Remove Stop Word ===
 # kalimat = 'Dengan Menggunakan Python dan Library Sastrawi saya dapat melakukan proses Stopword Removal'
 # print(removeStopWord(kalimat))
 
 # === Find Synonym ===
-# print(getSinonim('saya'))
+# print(getSinonim('Spain'))
+
+# === Regex ===
+# # txt = 'the rain in spain'
+# x = re.search('^siapa*', 'abc', flags = re.IGNORECASE)
+# print(x)
+Regex('^siapa nama.*')
+
+# regexAddSynonim(0,5,8,'saya suka kamu', 'suka')
+txt = 'burung'
