@@ -122,7 +122,6 @@ def BM(pattern, text):
         return 0.0
     j = m-1
     
-
     if(pattern[j] == text[i]):
         if(j == 0):
             return m*100/n
@@ -130,8 +129,11 @@ def BM(pattern, text):
             i -= 1
             j -= 1
     else:
-        lastOcc = last[text[i]]
-        i += m
+        lastOcc = last[ord(text[i])]
+        if(j < 1+lastOcc):
+            i += m - j
+        else:
+            i += m- lastOcc
         j = m-1
 
     while (i<=n-1):
@@ -142,8 +144,11 @@ def BM(pattern, text):
                 i -= 1
                 j -= 1
         else:
-            lastOcc = last[i]
-            i += m
+            lastOcc = last[ord(text[i])]
+            if(j < 1+lastOcc):
+                i += m - j
+            else:
+                i += m- lastOcc
             j = m-1
     return 0.0
 
@@ -151,7 +156,7 @@ def makeLast(pattern):
     last = [-1 for i in range(128)]
     m = len(pattern)
     for i in range(m):
-        last[i] += i
+        last[ord(pattern[i])] = i
     return last
 
 def addSynonym(pattern, listOfSynonym):
@@ -237,8 +242,8 @@ def specialCase(pattern, text):
     for i in words:
         max = 0
         for j in words2:
-            score = KMP(i,j)
-            score2 = KMP(j,i)
+            score = BM(i,j)
+            score2 = BM(j,i)
             if(score < score2):
                 score = score2
             if(score > max):
@@ -258,7 +263,6 @@ listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in
 print(listOfQnA)
 
 a = str(input())
-# b = str(input())
 # c = specialCase(a, b)
 # print(c)
 solveQuery(a)
