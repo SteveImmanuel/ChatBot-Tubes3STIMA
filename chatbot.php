@@ -16,12 +16,14 @@
 <body>    
     <div class="container-fluid mainContent">    
         <header class="headerPage">
-            Ini chatbot kita belum punya nama
+            <p style='font-size:30px;margin-bottom:0px;'>VSAZ</p>
+            <!-- <br> -->
+            <p>Chatbot sederhana menggunakan algoritma KMP, BM, dan Regex
         </header>
         <div class="row" >
             <div class="col-md-6">
                 <div id="avatar-screen" class="container-fluid avatarScreen">
-                    <video id="avatar-video1" class="videoAvatar" autoplay>
+                    <video id="avatar-video1" class="videoAvatar" autoplay muted>
                         <source id="video-src" src="assets/talk_avatar.mp4" type="video/mp4">
                     </video>
                     <video id="avatar-video2" class="hidden" preload="auto">
@@ -31,7 +33,7 @@
             </div>
             <div class="col-md-6" >
                 <div id="main-screen" class=" container-fluid mainScreen">
-                    <div id="chat-text" class="convText">
+                    <div id="chat-text" class="chatText">
                         <?php 
                             $chat=$_GET["chat"];
                             if(empty($chat)){
@@ -41,10 +43,25 @@
                             }
                         ?>                    
                     </div>
-                    <div id="answer-text" class="convText">
+                    <br>
+                    <div id="answer-text" class="ansText">
                         <?php 
-                            exec("python testpython.py",$result);
-                            echo($result[0]);
+                            exec("python3 backend.py ".$chat,$result);
+                            if(count($result)==2){
+                                echo($result[0]);
+                            }else if(count($result)==3){
+                                echo("Mungkin maksud anda:<br>");
+                                echo($result[0]);
+                                echo("<br>");
+                                echo($result[1]);
+                            }else if(count($result)==4){
+                                echo("Mungkin maksud anda:<br>");
+                                echo($result[0]);
+                                echo("<br>");
+                                echo($result[1]);
+                                echo("<br>");
+                                echo($result[2]);
+                            }
                         ?>                    
                     </div>
                 </div>

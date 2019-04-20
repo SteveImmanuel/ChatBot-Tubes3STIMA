@@ -62,9 +62,16 @@ form {
 	text-align: center;
 }
 
-.convText{
-	font-size:40px;
+.chatText{
+	font-size:30px;
 	font-family: Helvetica;
+	display: none;
+}
+
+.ansText{
+	font-size:30px;
+	font-family: Helvetica;
+	text-align: left;
 	display: none;
 }
 
@@ -91,7 +98,7 @@ form {
 	text-align: center;
 	font-size: 15px;
 	/* font-family: Helvetica; */
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	font-weight: bold;
 	color: #dcdcdc;
 }

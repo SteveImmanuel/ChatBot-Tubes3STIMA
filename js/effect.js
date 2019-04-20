@@ -4,25 +4,31 @@ $(document).ready(function(){
     
     var video1=document.getElementById("avatar-video1");
     var video2=document.getElementById("avatar-video2");
+
     video1.addEventListener("ended", changeAvatar, false);
     function changeAvatar() {
         video2.play();
+        video2.muted=true;
         video2.loop=true;
         video2.setAttribute("class","videoAvatar");
         video1.setAttribute("class","hidden");
     }
 
-    var temp=$("#test").height();
-    // var vidHeight=document.getElementById('avatar-screen').style.height;
-    // var outHeight=document.getElementById('main-screen').style.height;
-    // alert("vidHeight="+temp);
-    document.getElementById("main-screen").style.height=temp;
+    var outHeight=document.getElementById("avatar-screen").offsetHeight;
+    document.getElementById("main-screen").style.minHeight=outHeight*0.7+"px";
+    window.addEventListener("resize",resizePanel,false);
+    function resizePanel(){
+        outHeight=document.getElementById("avatar-screen").offsetHeight;
+        document.getElementById("main-screen").style.minHeight=outHeight*0.7+"px";
+        // alert("outHeight="+outHeight);
+    }
     
     $("#sendButton").click(
         function(){
             $("#chat-text").fadeOut(1000);
+            $("#answer-text").fadeOut(1000);
             var textInput=document.getElementById("chat-box").value;
-            move(textInput);
+            move(90);
             function move(max) {
                 var elem = document.getElementById("lvl-conf");   
                 var elemParent=document.getElementById("bar-conf");

@@ -1,18 +1,21 @@
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from tesaurus import *
 import re
+import sys
 
 def controller(query):
     splitBySpace = query.split(" ")
     isRegex = False
     i = 0
+    # print(query)
     while (i < len(splitBySpace) and not isRegex):
         isRegex = not splitBySpace[i].isalnum()
         i += 1
     if (isRegex):
+        # print('regex')
         Regex(query)
     else:
-        #do something
+        solveQuery(query)
         pass
 
 def regexAddSynonim(idx,start, end,query, word):
@@ -47,17 +50,21 @@ def Regex(query):
             res = regexAddSynonim(i, startIdx, endIdx, query, query[startIdx:endIdx])
             query = res['query']
             i = res['idx']
-            print(i)
+            # print(i)
             startIdx = -1
         i += 1
-    print(query)
+    # print(query)
     idxMatchedQuestion = []
     for i in range (len(listOfQnA)):
         x = re.search(query, listOfQnA[i][0], flags = re.IGNORECASE)
-        if (x != None):
+        if (x != None and len(idxMatchedQuestion)<3):
             idxMatchedQuestion.append(i)
-    for i in range (len(idxMatchedQuestion)):
-        print(listOfQnA[idxMatchedQuestion[i]][0])
+    if(len(idxMatchedQuestion)==1):
+        print(listOfQnA[idxMatchedQuestion[0]][1])
+    else:
+        for i in range (len(idxMatchedQuestion)):
+            print('- '+listOfQnA[idxMatchedQuestion[i]][0]+'?')
+    print('regex') 
 
 def removeStopWord(kalimat):
     factory = StopWordRemoverFactory()
@@ -172,6 +179,7 @@ def solveQuery(pattern):
     dummy = [None for i in range(len(listOfQnA))]
     for i in range(len(listOfQnA)):
         dummy[i]=listOfQnA[i].copy()
+    patter=pattern.lower()
     pattern = removeStopWord(pattern)
     modified_pattern = [pattern]
     words = pattern.split(' ')
@@ -184,6 +192,7 @@ def solveQuery(pattern):
     index = 0
     for question in dummy:
         question[0] = removeStopWord(question[0])
+        question[0] = question[0].lower()
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
@@ -192,10 +201,10 @@ def solveQuery(pattern):
             if(score >= max[0]):
                 max[0] = score
                 indexQnA[0] = index
-            elif(score >= max[1] and question != listOfQnA[indexQnA[0]]):
+            elif(score >= max[1] and question[0] != dummy[indexQnA[0]][0]):
                 max[1] = score
                 indexQnA[1] = index
-            elif(score >= max[2] and question != listOfQnA[indexQnA[1]] and question != listOfQnA[indexQnA[0]]):
+            elif(score >= max[2] and question[0] != dummy[indexQnA[1]][0] and question[0] != dummy[indexQnA[0]][0]):
                 max[2] = score
                 indexQnA[2] = index
         index += 1
@@ -212,22 +221,22 @@ def solveQuery(pattern):
                 if(score >= max[0]):
                     max[0] = score
                     indexQnA[0] = index
-                elif(score >= max[1] and question != listOfQnA[indexQnA[0]]):
+                elif(score >= max[1] and question[0] != dummy[indexQnA[0]][0]):
                     max[1] = score
                     indexQnA[1] = index
-                elif(score >= max[2] and question != listOfQnA[indexQnA[1]] and question != listOfQnA[indexQnA[0]]):
+                elif(score >= max[2] and question[0] != dummy[indexQnA[1]][0] and question[0] != dummy[indexQnA[0]][0]):
                     max[2] = score
                     indexQnA[2] = index
             index += 1
     if(max[0] >= 90 and max[1] < 90):
         print(listOfQnA[indexQnA[0]][1])
     elif(max[0] >= 90 and max[1] >= 90 and max[2] < 90):
-        print(listOfQnA[indexQnA[0]][0])
-        print(listOfQnA[indexQnA[1]][0])
+        print('- '+listOfQnA[indexQnA[0]][0]+'?')
+        print('- '+listOfQnA[indexQnA[1]][0]+'?')
     else:
-        print(listOfQnA[indexQnA[0]][0])
-        print(listOfQnA[indexQnA[1]][0])
-        print(listOfQnA[indexQnA[2]][0])
+        print('- '+listOfQnA[indexQnA[0]][0]+'?')
+        print('- '+listOfQnA[indexQnA[1]][0]+'?')
+        print('- '+listOfQnA[indexQnA[2]][0]+'?')
     print(max[0])
 
 def specialCase(pattern, text):
@@ -257,12 +266,18 @@ def specialCase(pattern, text):
 
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
+
 # print(listOfQnA)
 
-a = str(input())
+# a = str(input())
 # c = specialCase(a, b)
 # print(c)
-solveQuery(a)
+query=''
+for i in range(1,len(sys.argv)):
+    query+=sys.argv[i]+' '
+        
+query=query.strip().rstrip('?')
+controller(query)
 
 # === Remove Stop Word ===
 # kalimat = 'Dengan Menggunakan Python dan Library Sastrawi saya dapat melakukan proses Stopword Removal'
