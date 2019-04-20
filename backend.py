@@ -179,13 +179,11 @@ def solveQuery(pattern):
         sinonim = getSinonim(i)
         for j in sinonim:
             modified_pattern.append(pattern.replace(i, j))
-    print(modified_pattern)
     max = [0 for i in range(3)]
     indexQnA = [0 for i in range(3)]
     index = 0
     for question in dummy:
         question[0] = removeStopWord(question[0])
-        print(question[0])
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
@@ -206,7 +204,6 @@ def solveQuery(pattern):
         index = 0
         for question in dummy:
             question[0] = removeStopWord(question[0])
-            print(question[0])
             for x in modified_pattern:
                 score = specialCase(x, question[0])
                 score2 = specialCase(question[0], x)
@@ -222,7 +219,6 @@ def solveQuery(pattern):
                     max[2] = score
                     indexQnA[2] = index
             index += 1
-    print(max)  
     if(max[0] >= 90 and max[1] < 90):
         print(listOfQnA[indexQnA[0]][1])
     elif(max[0] >= 90 and max[1] >= 90 and max[2] < 90):
@@ -232,6 +228,7 @@ def solveQuery(pattern):
         print(listOfQnA[indexQnA[0]][0])
         print(listOfQnA[indexQnA[1]][0])
         print(listOfQnA[indexQnA[2]][0])
+    print(max[0])
 
 def specialCase(pattern, text):
     #comparing each word
@@ -260,7 +257,7 @@ def specialCase(pattern, text):
 
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
-print(listOfQnA)
+# print(listOfQnA)
 
 a = str(input())
 # c = specialCase(a, b)
