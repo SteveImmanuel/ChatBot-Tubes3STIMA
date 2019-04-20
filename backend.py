@@ -176,7 +176,6 @@ def solveQuery(pattern):
             modified_pattern.append(pattern.replace(i, j))
     print(modified_pattern)
     max = [0 for i in range(3)]
-    temp = [["None", "None"] for i in range(3)]
     indexQnA = [0 for i in range(3)]
     index = 0
     for question in dummy:
@@ -189,20 +188,41 @@ def solveQuery(pattern):
                 score = score2
             if(score >= max[0]):
                 max[0] = score
-                temp[0] = question
                 indexQnA[0] = index
-            elif(score >= max[1] and question != temp[0]):
+            elif(score >= max[1] and question != listOfQnA[indexQnA[0]]):
                 max[1] = score
-                temp[1] = question
                 indexQnA[1] = index
-            elif(score >= max[2] and question != temp[1] and question != temp[0]):
+            elif(score >= max[2] and question != listOfQnA[indexQnA[1]] and question != listOfQnA[indexQnA[0]]):
                 max[2] = score
-                temp[2] = question
                 indexQnA[2] = index
         index += 1
-    print(max)
-    if(max[0] >= 90):
-        print(temp[0][1])
+    
+    if(max[0] != 100):
+        index = 0
+        for question in dummy:
+            question[0] = removeStopWord(question[0])
+            print(question[0])
+            for x in modified_pattern:
+                score = specialCase(x, question[0])
+                score2 = specialCase(question[0], x)
+                if(score < score2):
+                    score = score2
+                if(score >= max[0]):
+                    max[0] = score
+                    indexQnA[0] = index
+                elif(score >= max[1] and question != listOfQnA[indexQnA[0]]):
+                    max[1] = score
+                    indexQnA[1] = index
+                elif(score >= max[2] and question != listOfQnA[indexQnA[1]] and question != listOfQnA[indexQnA[0]]):
+                    max[2] = score
+                    indexQnA[2] = index
+            index += 1
+    print(max)  
+    if(max[0] >= 90 and max[1] < 90):
+        print(listOfQnA[indexQnA[0]][1])
+    elif(max[0] >= 90 and max[1] >= 90 and max[2] < 90):
+        print(listOfQnA[indexQnA[0]][0])
+        print(listOfQnA[indexQnA[1]][0])
     else:
         print(listOfQnA[indexQnA[0]][0])
         print(listOfQnA[indexQnA[1]][0])
@@ -241,7 +261,7 @@ a = str(input())
 # b = str(input())
 # c = specialCase(a, b)
 # print(c)
-listOfAnswer = solveQuery(a)
+solveQuery(a)
 
 # === Remove Stop Word ===
 # kalimat = 'Dengan Menggunakan Python dan Library Sastrawi saya dapat melakukan proses Stopword Removal'
