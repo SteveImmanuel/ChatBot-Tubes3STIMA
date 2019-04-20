@@ -154,16 +154,6 @@ def makeLast(pattern):
         last[i] += i
     return last
 
-def deleteStopWord(pattern, listOfStopWord):
-#clean the received string
-    for word in listOfStopWord:
-        x = word + " "
-        pattern = pattern.replace(x, '')
-        pattern = pattern.replace(word, '')
-    pattern = pattern.replace('?', '')
-    pattern = pattern.strip()
-    return pattern
-
 def addSynonym(pattern, listOfSynonym):
 #generate list of similar string meaning with pattern
     result = [pattern]
@@ -173,9 +163,13 @@ def addSynonym(pattern, listOfSynonym):
             result.append(temp)
     return result
 
-def solveQuery(pattern, listOfStopWord, listOfQnA, listOfSynonym):
-    pattern = deleteStopWord(pattern, listOfStopWord)
-    modified_pattern = addSynonym(pattern, listOfSynonym)
+def solveQuery(pattern):
+    pattern = removeStopWord(pattern)
+    modified_pattern = [pattern]
+    words = pattern.split()
+    for i in words:
+        modified_pattern.append(pattern.replace(i, getSinonim(i)))
+    print(modified_pattern)
     max = [0 for i in range(3)]
     temp = [["None", "None"] for i in range(3)]
     for question in listOfQnA:
@@ -194,7 +188,12 @@ def solveQuery(pattern, listOfStopWord, listOfQnA, listOfSynonym):
                 max[2] = score
                 temp[2] = question
     print(max)
-    return temp
+    if(max[0] >= 90):
+        print(temp[0][1])
+    else:
+        print(temp[0][1])
+        print(temp[1][1])
+        print(temp[2][1])
 
 def specialCase(pattern, text):
     #comparing each word
