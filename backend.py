@@ -164,36 +164,49 @@ def addSynonym(pattern, listOfSynonym):
     return result
 
 def solveQuery(pattern):
+    dummy = [None for i in range(len(listOfQnA))]
+    for i in range(len(listOfQnA)):
+        dummy[i]=listOfQnA[i].copy()
     pattern = removeStopWord(pattern)
     modified_pattern = [pattern]
-    words = pattern.split()
+    words = pattern.split(' ')
     for i in words:
-        modified_pattern.append(pattern.replace(i, getSinonim(i)))
+        sinonim = getSinonim(i)
+        for j in sinonim:
+            modified_pattern.append(pattern.replace(i, j))
     print(modified_pattern)
     max = [0 for i in range(3)]
     temp = [["None", "None"] for i in range(3)]
-    for question in listOfQnA:
+    indexQnA = [0 for i in range(3)]
+    index = 0
+    for question in dummy:
+        question[0] = removeStopWord(question[0])
+        print(question[0])
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
             if(score < score2):
                 score = score2
-            if(score >= max[0] and question != temp[0] and question != temp[1] and  question != temp[2]):
+            if(score >= max[0]):
                 max[0] = score
                 temp[0] = question
-            elif(score >= max[1] and question != temp[0] and question != temp[1] and  question != temp[2]):
+                indexQnA[0] = index
+            elif(score >= max[1] and question != temp[0]):
                 max[1] = score
                 temp[1] = question
-            elif(score >= max[2] and question != temp[0] and question != temp[1] and  question != temp[2]):
+                indexQnA[1] = index
+            elif(score >= max[2] and question != temp[1] and question != temp[0]):
                 max[2] = score
                 temp[2] = question
+                indexQnA[2] = index
+        index += 1
     print(max)
     if(max[0] >= 90):
         print(temp[0][1])
     else:
-        print(temp[0][1])
-        print(temp[1][1])
-        print(temp[2][1])
+        print(listOfQnA[indexQnA[0]][0])
+        print(listOfQnA[indexQnA[1]][0])
+        print(listOfQnA[indexQnA[2]][0])
 
 def specialCase(pattern, text):
     #comparing each word
@@ -222,14 +235,13 @@ def specialCase(pattern, text):
 
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
-# print(listOfQnA)
+print(listOfQnA)
 
-# a = str(input())
+a = str(input())
 # b = str(input())
 # c = specialCase(a, b)
 # print(c)
-# listOfAnswer = solveQuery(a, listOfStopWord, listOfQnA, listOfSynonym)
-# print(listOfAnswer)
+listOfAnswer = solveQuery(a)
 
 # === Remove Stop Word ===
 # kalimat = 'Dengan Menggunakan Python dan Library Sastrawi saya dapat melakukan proses Stopword Removal'
@@ -242,7 +254,7 @@ listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in
 # # txt = 'the rain in spain'
 # x = re.search('^siapa*', 'abc', flags = re.IGNORECASE)
 # print(x)
-Regex('^siapa nama.*')
+# Regex('^siapa nama.*')
 
 # regexAddSynonim(0,5,8,'saya suka kamu', 'suka')
-txt = 'burung'
+# txt = 'burung'
