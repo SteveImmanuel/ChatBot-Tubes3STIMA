@@ -111,12 +111,25 @@ def addSynonym(pattern, listOfSynonym):
             result.append(temp)
     return result
 
+def deleteStopWord(pattern, listOfStopWord):
+#clean the received string
+    for word in listOfStopWord:
+        x = word + " "
+        pattern = pattern.replace(x, '')
+        pattern = pattern.replace(word, '')
+    pattern = pattern.replace('?', '')
+    pattern = pattern.strip()
+    return pattern
+
 def solveQuery(pattern):
+    fStopWord = open('StopWord.txt', 'r')#readfile
+    listOfStopWord = [line.rstrip('\n') for line in fStopWord]
     dummy = [None for i in range(len(listOfQnA))]
     for i in range(len(listOfQnA)):
         dummy[i]=listOfQnA[i].copy()
     pattern=pattern.lower()
-    pattern = removeStopWord(pattern)
+    pattern = deleteStopWord(pattern, listOfStopWord)
+    print(pattern)
     modified_pattern = [pattern]
     words = pattern.split(' ')
     for i in words:
@@ -127,8 +140,9 @@ def solveQuery(pattern):
     indexQnA = [0 for i in range(3)]
     index = 0
     for question in dummy:
-        question[0] = removeStopWord(question[0])
+        question[0] = deleteStopWord(question[0], listOfStopWord)
         question[0] = question[0].lower()
+        print(question[0])
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
