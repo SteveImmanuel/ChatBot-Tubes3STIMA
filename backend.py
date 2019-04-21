@@ -179,7 +179,7 @@ def solveQuery(pattern):
     dummy = [None for i in range(len(listOfQnA))]
     for i in range(len(listOfQnA)):
         dummy[i]=listOfQnA[i].copy()
-    patter=pattern.lower()
+    pattern=pattern.lower()
     pattern = removeStopWord(pattern)
     modified_pattern = [pattern]
     words = pattern.split(' ')
