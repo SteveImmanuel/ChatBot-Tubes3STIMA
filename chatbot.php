@@ -44,23 +44,25 @@
                     <br>
                     <div id="answer-text" class="ansText">
                         <?php 
-                            exec("python controller.py ".$chat,$result);
-                            if(count($result)==2){
-                                echo($result[0]);
-                            }else if(count($result)==3){
-                                echo("Mungkin maksud anda:<br>");
-                                echo($result[0]);
-                                echo("<br>");
-                                echo($result[1]);
-                            }else if(count($result)==4){
-                                echo("Mungkin maksud anda:<br>");
-                                echo($result[0]);
-                                echo("<br>");
-                                echo($result[1]);
-                                echo("<br>");
-                                echo($result[2]);
+                            if(!empty($chat)){
+                                exec("python controller.py ".$chat,$result);
+                                if(count($result)==2){
+                                    echo($result[0]);
+                                }else if(count($result)==3){
+                                    echo("Mungkin maksud anda:<br>");
+                                    echo($result[0]);
+                                    echo("<br>");
+                                    echo($result[1]);
+                                }else if(count($result)==4){
+                                    echo("Mungkin maksud anda:<br>");
+                                    echo($result[0]);
+                                    echo("<br>");
+                                    echo($result[1]);
+                                    echo("<br>");
+                                    echo($result[2]);
+                                }
+                                $percentage=$result[count($result)-1];
                             }
-                            $percentage=$result[count($result)-1];
                         ?>                    
                     </div>
                 </div>
