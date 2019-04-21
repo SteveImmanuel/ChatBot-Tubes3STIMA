@@ -129,7 +129,6 @@ def solveQuery(pattern):
         dummy[i]=listOfQnA[i].copy()
     pattern=pattern.lower()
     pattern = deleteStopWord(pattern, listOfStopWord)
-    print(pattern)
     modified_pattern = [pattern]
     words = pattern.split(' ')
     for i in words:
@@ -142,7 +141,6 @@ def solveQuery(pattern):
     for question in dummy:
         question[0] = deleteStopWord(question[0], listOfStopWord)
         question[0] = question[0].lower()
-        print(question[0])
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
