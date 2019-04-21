@@ -1,5 +1,3 @@
-Siapakah nama saya? Vinsen
-Apakah melon bulat? Ya
 Apakah ada alat untuk mencari bug? Ada, menggunakkan PyChecker
 Apakah ada arahan untuk menggunakkan python? Ada di dokumentasi PEP8
 Bagaimana cara mengakses variabel global python? Menambahkan tag global sebelum pendeklarasian variabel
@@ -12,8 +10,8 @@ Apa kepanjangan SKSD? Sistem Komunikasi Satelit Domestik
 Tanggal berapa diadakan pemilu tahun ini? 17 April 2019
 Sudah berapa kali diadakan pemilu presiden? 4 Kali
 Pemilu diadakan berapa kali setahun? 5 tahun sekali
-Siapa saja pembuat anda? Steve, Vinsen, dan Azhar
-Apa saja stack yang dipakai untuk membuat anda? Tidak ada
+Siapa saja pembuat anda? Lihat footer halaman web ini
+Apa saja stack yang dipakai untuk membuat anda? Python, PHP, JavaScript, CSS
 Apa nama ibukota Indonesia? DKI Jakarta
 Nama ibukota Indonesia sebelum disebut Jakarta adalah? Jayakarta
 Siapa pembuat algoritma KMP? Knuth-Morris-Prat
@@ -25,3 +23,15 @@ Tahun berapa Indonesia merdeka? 1945
 Berapa tahun Indonesia dijajah Jepang? 3 setengah tahun
 Dimana Soekarno memproklamasikan kemerdekaan Indonesia? Jl. Pegangsaan Timur No.56
 Dimana kantin terdekat Labtek 5? Kantin Borju
+Kamu namanya siapa? Namaku VSAZ-BOT
+Apa singkatan VSAZ-BOT? Singkatan dari Vinsen Steve Azhar - Bot
+Apa warna kesukaan kamu? Warna kesukaanku item
+Kenapa suka warna item? Karna suka aja, gatau kenapa
+Kalau sama aku suka ga? G
+Dimana tempat lahirmu? Bandung
+Apa kamu dari Jawa Barat? Ya
+Apa alat musik kesukaanmu? Angklung
+Apakah kamu suka makan? Tidak
+Berapa berat badanmu? Seberat benda yang gunakan untuk melihat aku
+
+

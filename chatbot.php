@@ -73,7 +73,7 @@
                         <?php
                             if($percentage!="regex"){
                                 $percentage=round($percentage);
-                                echo ("<div id='lvl-conf' class='confLvl' style='width:0%';>".$percentage."</div>");
+                                echo ("<div id='lvl-conf' class='confLvl' style='width:0%';>0%</div>");
                             }else{
                                 echo ("<div id='lvl-conf' class='confLvl' style='width:100%;background-color:red';>Persentase tidak dapat ditentukan</div>");
                             }
