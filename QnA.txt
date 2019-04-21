@@ -23,7 +23,7 @@ Tahun berapa Indonesia merdeka? 1945
 Berapa tahun Indonesia dijajah Jepang? 3 setengah tahun
 Dimana Soekarno memproklamasikan kemerdekaan Indonesia? Jl. Pegangsaan Timur No.56
 Dimana kantin terdekat Labtek 5? Kantin Borju
-Kamu namanya siapa? Namaku VSAZ-BOT
+Siapa nama kamu? Namaku VSAZ-BOT
 Apa singkatan VSAZ BOT? Singkatan dari Vinsen Steve Azhar - Bot
 Apa warna kesukaan kamu? Warna kesukaanku item
 Kenapa suka warna item? Karna suka aja, gatau kenapa

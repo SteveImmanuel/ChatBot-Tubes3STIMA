@@ -46,7 +46,9 @@
                         <?php 
                             if(!empty($chat)){
                                 exec("python controller.py ".$chat,$result);
-                                if(count($result)==2){
+                                if(count($result)==1){
+                                    echo("Coba tanya yang lain");
+                                }else if(count($result)==2){
                                     echo($result[0]);
                                 }else if(count($result)==3){
                                     echo("Mungkin maksud anda:<br>");
