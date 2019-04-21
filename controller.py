@@ -8,6 +8,8 @@ from KMP_BM import *
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
 
+
+
 query = ""
 for i in range(len(sys.argv)-1):
     query += sys.argv[i+1] + " "
