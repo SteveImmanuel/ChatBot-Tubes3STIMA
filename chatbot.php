@@ -11,13 +11,11 @@
     <title>Document</title>
     <script src="js/jquery.min.js"></script>
     <script src="js/effect.js"></script>
-    <script src="//code.responsivevoice.org/responsivevoice.js?key=FfhGa0xE"></script>
 </head>
 <body>    
     <div class="container-fluid mainContent">    
         <header class="headerPage">
-            <p style='font-size:30px;margin-bottom:0px;'>VSAZ</p>
-            <!-- <br> -->
+            <p style='font-size:30px;margin-bottom:0px;'>VSAZ-BOT</p>
             <p>Chatbot sederhana menggunakan algoritma KMP, BM, dan Regex
         </header>
         <div class="row" >
@@ -46,21 +44,24 @@
                     <br>
                     <div id="answer-text" class="ansText">
                         <?php 
-                            exec("python3 backend.py ".$chat,$result);
-                            if(count($result)==2){
-                                echo($result[0]);
-                            }else if(count($result)==3){
-                                echo("Mungkin maksud anda:<br>");
-                                echo($result[0]);
-                                echo("<br>");
-                                echo($result[1]);
-                            }else if(count($result)==4){
-                                echo("Mungkin maksud anda:<br>");
-                                echo($result[0]);
-                                echo("<br>");
-                                echo($result[1]);
-                                echo("<br>");
-                                echo($result[2]);
+                            if(!empty($chat)){
+                                exec("python controller.py ".$chat,$result);
+                                if(count($result)==2){
+                                    echo($result[0]);
+                                }else if(count($result)==3){
+                                    echo("Mungkin maksud anda:<br>");
+                                    echo($result[0]);
+                                    echo("<br>");
+                                    echo($result[1]);
+                                }else if(count($result)==4){
+                                    echo("Mungkin maksud anda:<br>");
+                                    echo($result[0]);
+                                    echo("<br>");
+                                    echo($result[1]);
+                                    echo("<br>");
+                                    echo($result[2]);
+                                }
+                                $percentage=$result[count($result)-1];
                             }
                         ?>                    
                     </div>
@@ -70,9 +71,17 @@
                     Level Keyakinan:
                     <div id="bar-conf" class="confBar">
                         <?php
-                            $percentage = getPercentage($_GET["percentage"]);
-                            echo ("<div id='lvl-conf' class='confLvl' style='width:".$percentage."';>".$percentage."</div>");
+                            if($percentage!="regex"){
+                                $percentage=round($percentage);
+                                echo ("<div id='lvl-conf' class='confLvl' style='width:0%';>".$percentage."</div>");
+                            }else{
+                                echo ("<div id='lvl-conf' class='confLvl' style='width:100%;background-color:red';>Persentase tidak dapat ditentukan</div>");
+                            }
                         ?>
+                        <script>
+                            var perc="<?php echo($percentage); ?>";
+                            move(perc);
+                        </script>
                     </div>
                 </div>
             
@@ -88,9 +97,6 @@
             </div>
         </div>
     </div>
-    <!-- <button onClick=Test()>speak</button>
-    <input onclick='responsiveVoice.speak("halo nama saya ares");' type='button' value='🔊 Play' />
--->
 
     <footer class="footerPage">
         <div class="container-fluid">

@@ -197,8 +197,5 @@ def specialCase(pattern, text):
     else:
         return 0.0
 
-# fStopWord = open('StopWord.txt', 'r')#readfile
-# listOfStopWord = [line.rstrip('\n') for line in fStopWord]
-
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]

@@ -63,16 +63,18 @@ form {
 }
 
 .chatText{
-	font-size:30px;
+	font-size:28px;
 	font-family: Helvetica;
 	display: none;
+	color:#0d0a46;
 }
 
 .ansText{
-	font-size:30px;
+	font-size:28px;
 	font-family: Helvetica;
 	text-align: left;
 	display: none;
+	color:#42587c;
 }
 
 .avatarScreen{
@@ -98,7 +100,7 @@ form {
 	text-align: center;
 	font-size: 15px;
 	/* font-family: Helvetica; */
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	font-weight: bold;
 	color: #dcdcdc;
 }
