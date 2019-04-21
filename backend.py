@@ -246,9 +246,9 @@ def specialCase(pattern, text):
     words = pattern.split()
     words2 = text.split()
     point = 0
-    count = 0
     for i in words:
         max = 0
+        count = 0
         for j in words2:
             score = BM(i,j)
             score2 = BM(j,i)
