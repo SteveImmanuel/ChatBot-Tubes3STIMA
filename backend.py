@@ -187,14 +187,12 @@ def solveQuery(pattern):
         sinonim = getSinonim(i)
         for j in sinonim:
             modified_pattern.append(pattern.replace(i, j))
-    print(modified_pattern)
     max = [0 for i in range(3)]
     indexQnA = [0 for i in range(3)]
     index = 0
     for question in dummy:
         question[0] = removeStopWord(question[0])
         question[0] = question[0].lower()
-        print(question[0])
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
@@ -223,10 +221,10 @@ def solveQuery(pattern):
                 if(score >= max[0]):
                     max[0] = score
                     indexQnA[0] = index
-                elif(score >= max[1] and question[0] != dummy[indexQnA[0]][0]):
+                elif(score >= max[1] and index != indexQnA[0]):
                     max[1] = score
                     indexQnA[1] = index
-                elif(score >= max[2] and question[0] != dummy[indexQnA[1]][0] and question[0] != dummy[indexQnA[0]][0]):
+                elif(score >= max[2] and index != indexQnA[0] and index != indexQnA[1]):
                     max[2] = score
                     indexQnA[2] = index
             index += 1
@@ -243,22 +241,25 @@ def solveQuery(pattern):
 
 def specialCase(pattern, text):
     #comparing each word
-    words = pattern.split()
-    words2 = text.split()
-    point = 0
-    for i in words:
-        max = 0
-        count = 0
-        for j in words2:
-            score = BM(i,j)
-            score2 = BM(j,i)
-            if(score < score2):
-                score = score2
-            if(score > max):
-                max = score  
-            count += len(j)
-        point += len(i)*max
-    return point/count
+    if(len(pattern) <= len(text)):
+        words = pattern.split()
+        words2 = text.split()
+        point = 0
+        for i in words:
+            max = 0
+            count = 0
+            for j in words2:
+                score = BM(i,j)
+                score2 = BM(j,i)
+                if(score < score2):
+                    score = score2
+                if(score > max):
+                    max = score  
+                count += len(j)
+            point += len(i)*max
+        return point/count
+    else:
+        return 0.0
 
 # fStopWord = open('StopWord.txt', 'r')#readfile
 # listOfStopWord = [line.rstrip('\n') for line in fStopWord]
