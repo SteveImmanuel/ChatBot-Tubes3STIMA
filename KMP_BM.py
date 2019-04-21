@@ -115,7 +115,7 @@ def solveQuery(pattern):
     dummy = [None for i in range(len(listOfQnA))]
     for i in range(len(listOfQnA)):
         dummy[i]=listOfQnA[i].copy()
-    patter=pattern.lower()
+    pattern=pattern.lower()
     pattern = removeStopWord(pattern)
     modified_pattern = [pattern]
     words = pattern.split(' ')
@@ -177,22 +177,25 @@ def solveQuery(pattern):
 
 def specialCase(pattern, text):
     #comparing each word
-    words = pattern.split()
-    words2 = text.split()
-    point = 0
-    count = 0
-    for i in words:
-        max = 0
-        for j in words2:
-            score = BM(i,j)
-            score2 = BM(j,i)
-            if(score < score2):
-                score = score2
-            if(score > max):
-                max = score
-        point += len(i)*max
-        count += len(i)
-    return point/count
+    if(len(pattern) <= len(text)):
+        words = pattern.split()
+        words2 = text.split()
+        point = 0
+        for i in words:
+            max = 0
+            count = 0
+            for j in words2:
+                score = BM(i,j)
+                score2 = BM(j,i)
+                if(score < score2):
+                    score = score2
+                if(score > max):
+                    max = score  
+                count += len(j)
+            point += len(i)*max
+        return point/count
+    else:
+        return 0.0
 
 # fStopWord = open('StopWord.txt', 'r')#readfile
 # listOfStopWord = [line.rstrip('\n') for line in fStopWord]
