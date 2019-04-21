@@ -187,12 +187,14 @@ def solveQuery(pattern):
         sinonim = getSinonim(i)
         for j in sinonim:
             modified_pattern.append(pattern.replace(i, j))
+    print(modified_pattern)
     max = [0 for i in range(3)]
     indexQnA = [0 for i in range(3)]
     index = 0
     for question in dummy:
         question[0] = removeStopWord(question[0])
         question[0] = question[0].lower()
+        print(question[0])
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
@@ -253,9 +255,9 @@ def specialCase(pattern, text):
             if(score < score2):
                 score = score2
             if(score > max):
-                max = score
+                max = score  
+            count += len(j)
         point += len(i)*max
-        count += len(i)
     return point/count
 
 # fStopWord = open('StopWord.txt', 'r')#readfile
