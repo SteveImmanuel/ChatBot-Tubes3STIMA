@@ -1,6 +1,3 @@
-from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
-from tesaurus import *
-import re
 import sys
 from regex import *
 from KMP_BM import *
@@ -13,7 +10,6 @@ listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in
 query = ""
 for i in range(len(sys.argv)-1):
     query += sys.argv[i+1] + " "
-
 query=query.strip().rstrip('?')
 
 splitBySpace = query.split(" ")

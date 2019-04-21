@@ -1,4 +1,3 @@
-from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from tesaurus import *
 import re
 
@@ -30,14 +29,11 @@ def Regex(query):
                 startIdx = i
         elif (startIdx != -1) :
             endIdx = i
-            # print( regexAddSynonim(i, startIdx, endIdx, query, query[startIdx:(endIdx+1)]))
             res = regexAddSynonim(i, startIdx, endIdx, query, query[startIdx:endIdx])
             query = res['query']
             i = res['idx']
-            # print(i)
             startIdx = -1
         i += 1
-    # print(query)
     idxMatchedQuestion = []
     for i in range (len(listOfQnA)):
         x = re.search(query, listOfQnA[i][0], flags = re.IGNORECASE)
@@ -49,12 +45,6 @@ def Regex(query):
         for i in range (len(idxMatchedQuestion)):
             print('- '+listOfQnA[idxMatchedQuestion[i]][0]+'?')
     print('regex') 
-
-def removeStopWord(kalimat):
-    factory = StopWordRemoverFactory()
-    stopword = factory.create_stop_word_remover()
-    stop = stopword.remove(kalimat)
-    return stop
 
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]

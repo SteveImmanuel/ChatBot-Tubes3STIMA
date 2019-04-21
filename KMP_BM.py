@@ -1,12 +1,5 @@
-from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from tesaurus import *
 import re
-
-def removeStopWord(kalimat):
-    factory = StopWordRemoverFactory()
-    stopword = factory.create_stop_word_remover()
-    stop = stopword.remove(kalimat)
-    return stop
 
 def KMP(pattern, text):
 #String Matching versi 1
@@ -113,13 +106,14 @@ def addSynonym(pattern, listOfSynonym):
 
 def deleteStopWord(pattern, listOfStopWord):
 #clean the received string
+    temp=pattern.split(' ')
     for word in listOfStopWord:
-        x = word + " "
-        pattern = pattern.replace(x, '')
-        pattern = pattern.replace(word, '')
-    pattern = pattern.replace('?', '')
-    pattern = pattern.strip()
-    return pattern
+        try:
+            temp.remove(word)
+        except:
+            continue
+    temp=' '.join(temp)
+    return temp
 
 def solveQuery(pattern):
     fStopWord = open('StopWord.txt', 'r')#readfile
@@ -139,8 +133,8 @@ def solveQuery(pattern):
     indexQnA = [0 for i in range(3)]
     index = 0
     for question in dummy:
-        question[0] = deleteStopWord(question[0], listOfStopWord)
         question[0] = question[0].lower()
+        question[0] = deleteStopWord(question[0], listOfStopWord)
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
@@ -160,7 +154,8 @@ def solveQuery(pattern):
     if(max[0] != 100):
         index = 0
         for question in dummy:
-            question[0] = removeStopWord(question[0])
+            question[0] = question[0].lower()
+            question[0] = deleteStopWord(question[0], listOfStopWord)
             for x in modified_pattern:
                 score = specialCase(x, question[0])
                 score2 = specialCase(question[0], x)
@@ -211,3 +206,7 @@ def specialCase(pattern, text):
 
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
+# a=input()
+# fStopWord = open('StopWord.txt', 'r')#readfile
+# listOfStopWord = [line.rstrip('\n') for line in fStopWord]
+# deleteStopWord(a,listOfStopWord)
