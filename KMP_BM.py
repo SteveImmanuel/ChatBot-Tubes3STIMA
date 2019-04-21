@@ -139,8 +139,8 @@ def solveQuery(pattern):
     indexQnA = [0 for i in range(3)]
     index = 0
     for question in dummy:
-        question[0] = deleteStopWord(question[0], listOfStopWord)
         question[0] = question[0].lower()
+        question[0] = deleteStopWord(question[0], listOfStopWord)
         for x in modified_pattern:
             score = KMP(x, question[0])
             score2 = KMP(question[0], x)
