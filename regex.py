@@ -18,6 +18,7 @@ def regexAddSynonim(idx,start, end,query, word):
 
 def deleteStopWord(pattern, listOfStopWord):
 #clean the received string
+    
     temp=pattern.split(' ')
     for word in listOfStopWord:
         try:
@@ -27,6 +28,33 @@ def deleteStopWord(pattern, listOfStopWord):
     temp=' '.join(temp)
     return temp
 
+def removeStopRegex(query, listOfStopWord):
+    i = 0
+    startIdx = 0
+    endIdx = 0
+    while (i < len(query)):
+        if (query[i].isalpha()):
+            if (startIdx == -1):
+                startIdx = i
+            elif (i == len(query)-1):
+                endIdx = i+1
+                for word in listOfStopWord:
+                    if (query[startIdx:endIdx] == word):
+                        query = query[:startIdx] + query[endIdx:]
+                        i = startIdx-1
+                        break;
+                startIdx = -1
+        elif (startIdx != -1):
+            endIdx = i
+            for word in listOfStopWord:
+                if (query[startIdx:endIdx] == word):
+                    query = query[:startIdx] + query[endIdx:]
+                    i = startIdx-1
+                    break;
+            startIdx = -1
+        i += 1
+    return query
+
 def Regex(query):
     query = query.lower()
     fStopWord = open('StopWord.txt', 'r')#readfile
@@ -34,8 +62,9 @@ def Regex(query):
     dummy = [None for i in range(len(listOfQnA))]
     for i in range(len(listOfQnA)):
         dummy[i]=listOfQnA[i].copy()
-    query = deleteStopWord(query, listOfStopWord)
-    query.replace(" ", ".*")
+        dummy[i][0] = deleteStopWord(dummy[i][0], listOfStopWord)
+    query = removeStopRegex(query, listOfStopWord)
+    query = query.replace(" ", ".*")
     length = len(query)
     i = 0
     startIdx = -1
@@ -44,6 +73,12 @@ def Regex(query):
         if (query[i].isalpha()):
             if (startIdx == -1):
                 startIdx = i
+            elif (i == len(query)-1):
+                endIdx = i+1
+                res = regexAddSynonim(i, startIdx, endIdx, query, query[startIdx:endIdx])
+                query = res['query']
+                i = res['idx']
+                startIdx = -1
         elif (startIdx != -1) :
             endIdx = i
             res = regexAddSynonim(i, startIdx, endIdx, query, query[startIdx:endIdx])
@@ -52,8 +87,8 @@ def Regex(query):
             startIdx = -1
         i += 1
     idxMatchedQuestion = []
-    for i in range (len(listOfQnA)):
-        x = re.search(query, listOfQnA[i][0], flags = re.IGNORECASE)
+    for i in range (len(dummy)):
+        x = re.search(query, dummy[i][0], flags = re.IGNORECASE)
         if (x != None and len(idxMatchedQuestion)<3):
             idxMatchedQuestion.append(i)
     if(len(idxMatchedQuestion)==1):
@@ -65,3 +100,5 @@ def Regex(query):
 
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
+query = input('Query :')
+Regex(query)
