@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <?php include "handler.php" ?>
     <title>Document</title>
     <script src="js/jquery.min.js"></script>
     <script src="js/effect.js"></script>
@@ -46,7 +45,7 @@
                     <div id="answer-text" class="ansText">
                         <?php 
                             if(!empty($chat)){
-                                exec("python controller.py ".$algo." ".$chat,$result);
+                                exec("python3 controller.py ".$algo." ".$chat,$result);
                                 if(count($result)==1){
                                     echo("Coba tanya yang lain");
                                 }else if(count($result)==2){
