@@ -16,9 +16,26 @@ def regexAddSynonim(idx,start, end,query, word):
         'idx' : idx
     }
 
+def deleteStopWord(pattern, listOfStopWord):
+#clean the received string
+    temp=pattern.split(' ')
+    for word in listOfStopWord:
+        try:
+            temp.remove(word)
+        except:
+            continue
+    temp=' '.join(temp)
+    return temp
 
 def Regex(query):
     query = query.lower()
+    fStopWord = open('StopWord.txt', 'r')#readfile
+    listOfStopWord = [line.rstrip('\n') for line in fStopWord]
+    dummy = [None for i in range(len(listOfQnA))]
+    for i in range(len(listOfQnA)):
+        dummy[i]=listOfQnA[i].copy()
+    query = deleteStopWord(query, listOfStopWord)
+    query.replace(" ", ".*")
     length = len(query)
     i = 0
     startIdx = -1
