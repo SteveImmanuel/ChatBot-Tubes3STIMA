@@ -34,6 +34,7 @@
                     <div id="chat-text" class="chatText">
                         <?php 
                             $chat=$_GET["chat"];
+                            $algo=$_GET["algo"];
                             if(empty($chat)){
                                 echo("Halo, selamat datang..");
                             } else {
@@ -45,7 +46,7 @@
                     <div id="answer-text" class="ansText">
                         <?php 
                             if(!empty($chat)){
-                                exec("python controller.py ".$chat,$result);
+                                exec("python controller.py ".$algo." ".$chat,$result);
                                 if(count($result)==1){
                                     echo("Coba tanya yang lain");
                                 }else if(count($result)==2){
@@ -89,6 +90,8 @@
             
                 <div class="mainInput">
                     <form id="chat-form" autocomplete="off" action="chatbot.php" method="get" onsubmit="return false">
+                        <input type="radio" name="algo" value="exact" checked>Exact Matching
+                        <input type="radio" name="algo" value="regex">Regex Matching
                         <div class="form-group center-block d-flex">
                             <input class="form-control" type="text" rows="1" id="chat-box" name="chat" placeholder="Katakan sesuatu..." autofocus>
                             <input id="sendButton" class="myButton" type="submit" value="Send">
