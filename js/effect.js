@@ -26,8 +26,19 @@ $(document).ready(function(){
         function(){
             $("#chat-text").fadeOut(1000);
             $("#answer-text").fadeOut(1000);
-            var textInput=document.getElementById("chat-box").value;
-            window.location.href = "chatbot.php?chat="+textInput;
+            var textInput=document.getElementById("chat-box").value;           
+            
+            var radios = document.getElementsByName('algo');
+            for (var i = 0, length = radios.length; i < length; i++)
+            {
+                if (radios[i].checked)
+                {
+                    var algo=radios[i].value;
+                    break;
+                }
+            }
+            
+            window.location.href = "chatbot.php?chat="+textInput+"&algo="+algo;
         }
         );
 });

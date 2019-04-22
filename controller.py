@@ -8,17 +8,13 @@ listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in
 
 
 query = ""
-for i in range(len(sys.argv)-1):
-    query += sys.argv[i+1] + " "
+for i in range(2,len(sys.argv)):
+    query += sys.argv[i] + " "
 query=query.strip().rstrip('?')
 
 splitBySpace = query.split(" ")
-isRegex = False
-i = 0
-while (i < len(splitBySpace) and not isRegex):
-    isRegex = not splitBySpace[i].isalnum()
-    i += 1
-if (isRegex):
-    Regex(query)
-else:
+
+if(sys.argv[1]=="exact"):
     solveQuery(query)
+else:
+    Regex(query)
