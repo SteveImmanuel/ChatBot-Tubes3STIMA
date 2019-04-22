@@ -100,5 +100,3 @@ def Regex(query):
 
 fQnA = open('QnA.txt', 'r')#readfile
 listOfQnA = [[word.rstrip('\n').strip() for word in line.split('?')] for line in fQnA]
-query = input('Query :')
-Regex(query)
